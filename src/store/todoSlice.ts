@@ -2,10 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { TodoState, Task } from "../types";
 
 const initialState: TodoState = {
-  tasks: [
-    { id: 1, text: "go for shopping", completed: false },
-    { id: 2, text: "grocery", completed: false },
-  ],
+  tasks: [],
 };
 
 const todoSlice = createSlice({

@@ -12,7 +12,7 @@ const StatusCard: React.FC = () => {
         <h2 className="text-4xl font-semibold mb-1 text-white">Task Done</h2>
         <h2 className="text-3xl mb-1 text-white">Keep it up</h2>
       </div>
-      <div className="w-36 h-36 bg-lime-green rounded-full flex items-center justify-center text-5xl text-white shadow-lg">
+      <div className="w-36 h-36 bg-lime-green rounded-full flex items-center justify-center text-5xl text-white">
         <span>
           {completedTasks}/{totalTasks}
         </span>

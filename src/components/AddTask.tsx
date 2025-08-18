@@ -31,11 +31,11 @@ const AddTask: React.FC = () => {
         value={newTask}
         onChange={handleInputChange}
         onKeyDown={handleKeyPress}
-        className="flex-1 bg-dark-card border border-dark-border rounded-lg px-4 py-4 text-white text-base outline-none placeholder:text-text-gray focus:border-lime-green focus:shadow-focus-lime transition-all duration-200"
+        className="flex-1 bg-add-task rounded-lg px-4 py-4 text-white text-base outline-none placeholder:text-text-gray transition-all duration-200"
       />
       <button
         onClick={handleAddTask}
-        className="w-14 h-14 bg-lime-green hover:bg-lime-dark text-black text-4xl  rounded-lg flex items-center justify-center transition-all duration-200 cursor-pointer transform hover:scale-105 active:scale-95"
+        className="w-14 h-14 bg-lime-green text-black text-4xl  rounded-lg flex items-center justify-center cursor-pointer"
       >
         +
       </button>

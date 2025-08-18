@@ -54,14 +54,10 @@ const TaskItem: React.FC<TaskItemProps> = ({ task }) => {
       <div className="flex items-center gap-4 flex-1">
         <button
           onClick={handleToggle}
-          className={`w-6 h-6 border-2 border-lime-green rounded-full flex items-center justify-center transition-all cursor-pointer ${
+          className={`w-8 h-8 border-2 border-lime-green rounded-full flex items-center justify-center transition-all cursor-pointer ${
             task.completed ? "bg-lime-green" : "bg-transparent"
           }`}
-        >
-          {task.completed && (
-            <span className="text-white text-sm font-bold">✓</span>
-          )}
-        </button>
+        ></button>
 
         {isEditing ? (
           <input
@@ -74,8 +70,8 @@ const TaskItem: React.FC<TaskItemProps> = ({ task }) => {
           />
         ) : (
           <span
-            className={`text-base ${
-              task.completed ? "line-through text-text-gray" : "text-white"
+            className={`text-lg ${
+              task.completed ? "line-through text-white" : "text-white"
             }`}
           >
             {task.text}
