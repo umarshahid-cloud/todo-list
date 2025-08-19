@@ -1,44 +1,69 @@
-import React, { useState, KeyboardEvent, ChangeEvent } from "react";
+import React from "react";
 import { useTodos } from "../hooks/useTodos";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+type FormValues = { task: string };
+
+const schema = yup.object({
+  task: yup
+    .string()
+    .trim()
+    .required("Please enter a task")
+    .min(1, "Task must not be empty"),
+});
 
 const AddTask: React.FC = () => {
-  const [newTask, setNewTask] = useState<string>("");
   const { addTask } = useTodos();
 
-  const handleAddTask = (): void => {
-    if (newTask.trim()) {
-      addTask(newTask.trim());
-      setNewTask("");
-    }
-  };
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<FormValues>({
+    resolver: yupResolver(schema),
+    defaultValues: { task: "" },
+  });
 
-  const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>): void => {
-    if (e.key === "Enter") {
-      handleAddTask();
-    }
-  };
-
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    setNewTask(e.target.value);
+  const onSubmit = (values: FormValues) => {
+    addTask(values.task.trim());
+    reset();
   };
 
   return (
-    <div className="flex gap-3 animate-fade-in">
-      <input
-        type="text"
-        placeholder="Write your next task"
-        value={newTask}
-        onChange={handleInputChange}
-        onKeyDown={handleKeyPress}
-        className="flex-1 bg-add-task rounded-lg px-4 py-4 text-white text-base outline-none placeholder:text-text-gray"
-      />
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="flex gap-3 animate-fade-in"
+    >
+      <div className="flex-1">
+        <input
+          type="text"
+          placeholder="Write your next task"
+          {...register("task")}
+          className={`w-full bg-add-task rounded-lg px-4 py-4 text-white text-base outline-none placeholder:text-text-gray
+            ${
+              errors.task
+                ? "border border-red-500"
+                : "border border-transparent"
+            }`}
+          // Hitting Enter will submit the form automatically
+        />
+        {errors.task && (
+          <p className="mt-1 text-sm text-red-400">{errors.task.message}</p>
+        )}
+      </div>
+
       <button
-        onClick={handleAddTask}
-        className="w-14 h-14 bg-lime-green text-black text-4xl  rounded-lg flex items-center justify-center cursor-pointer"
+        type="submit"
+        disabled={isSubmitting}
+        className="w-14 h-14 bg-lime-green text-black text-4xl rounded-lg flex items-center justify-center cursor-pointer disabled:opacity-70"
+        aria-label="Add task"
       >
         +
       </button>
-    </div>
+    </form>
   );
 };
 
