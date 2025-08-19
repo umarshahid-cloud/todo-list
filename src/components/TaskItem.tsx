@@ -84,13 +84,13 @@ const TaskItem: React.FC<TaskItemProps> = ({ task }) => {
           <>
             <button
               onClick={handleSave}
-              className="w-8 h-8 border border-lime-green text-lime-green rounded-md flex items-center justify-center text-sm hover:bg-lime-green hover:bg-opacity-10 transition-colors cursor-pointer"
+              className="m-3 w-8 h-8 border border-lime-green text-lime-green rounded-md flex items-center justify-center text-sm hover:bg-lime-green hover:bg-opacity-10 transition-colors cursor-pointer"
             >
               ✓
             </button>
             <button
               onClick={handleCancel}
-              className="w-8 h-8 border border-red-light text-red-light rounded-md flex items-center justify-center text-sm hover:bg-red-light hover:bg-opacity-10 transition-colors cursor-pointer"
+              className="my-3 w-8 h-8 border border-red-light text-red-light rounded-md flex items-center justify-center text-sm hover:bg-red-light hover:bg-opacity-10 transition-colors cursor-pointer"
             >
               ✕
             </button>
