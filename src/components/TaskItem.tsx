@@ -1,6 +1,5 @@
 import React, { useState, KeyboardEvent, ChangeEvent } from "react";
-import { useAppDispatch } from "../hooks/useAppDispatch";
-import { toggleTask, deleteTask, editTask } from "../store/todoSlice";
+import { useTodos } from "../hooks/useTodos";
 import { Task } from "../types";
 import EditIcon from "../assets/editIcon";
 import TrashIcon from "../assets/trashIcon";
@@ -12,14 +11,15 @@ interface TaskItemProps {
 const TaskItem: React.FC<TaskItemProps> = ({ task }) => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [editText, setEditText] = useState<string>(task.text);
-  const dispatch = useAppDispatch();
+
+  const { toggleTask, deleteTask, editTask } = useTodos();
 
   const handleToggle = (): void => {
-    dispatch(toggleTask(task.id));
+    toggleTask(task.id);
   };
 
   const handleDelete = (): void => {
-    dispatch(deleteTask(task.id));
+    deleteTask(task.id);
   };
 
   const handleEdit = (): void => {
@@ -29,7 +29,7 @@ const TaskItem: React.FC<TaskItemProps> = ({ task }) => {
 
   const handleSave = (): void => {
     if (editText.trim()) {
-      dispatch(editTask({ id: task.id, text: editText.trim() }));
+      editTask(task.id, editText.trim());
       setIsEditing(false);
     }
   };
@@ -55,7 +55,7 @@ const TaskItem: React.FC<TaskItemProps> = ({ task }) => {
         <button
           onClick={handleToggle}
           className={`w-8 h-8 border-2 border-lime-green rounded-full flex items-center justify-center transition-all cursor-pointer ${
-            task.completed ? "bg-lime-green" : "bg-transparent"
+            task.isComplete ? "bg-lime-green" : "bg-transparent"
           }`}
         ></button>
 
@@ -71,7 +71,7 @@ const TaskItem: React.FC<TaskItemProps> = ({ task }) => {
         ) : (
           <span
             className={`text-lg ${
-              task.completed ? "line-through text-white" : "text-white"
+              task.isComplete ? "line-through text-white" : "text-white"
             }`}
           >
             {task.text}
@@ -97,17 +97,11 @@ const TaskItem: React.FC<TaskItemProps> = ({ task }) => {
           </>
         ) : (
           <>
-            <button
-              onClick={handleEdit}
-              // className="w-8 h-8 border border-lime-green text-lime-green rounded-md flex items-center justify-center text-sm hover:bg-lime-green hover:bg-opacity-10 transition-colors cursor-pointer"
-            >
+            <button onClick={handleEdit}>
               <EditIcon size={32} color="#C2B39A" />
             </button>
 
-            <button
-              onClick={handleDelete}
-              // className="w-8 h-8 border border-red-light text-red-light rounded-md flex items-center justify-center text-sm hover:bg-red-light hover:bg-opacity-10 transition-colors cursor-pointer"
-            >
+            <button onClick={handleDelete}>
               <TrashIcon size={32} color="#C2B39A" />
             </button>
           </>

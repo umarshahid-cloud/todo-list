@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import todoReducer from "./todoSlice";
+import todoReducer from "./slices/todoSlice";
 import { RootState, TodoState } from "../types";
 
 const defaultTodoState: TodoState = {

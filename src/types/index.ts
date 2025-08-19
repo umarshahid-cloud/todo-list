@@ -1,7 +1,7 @@
 export interface Task {
   id: number;
   text: string;
-  completed: boolean;
+  isComplete: boolean;
 }
 
 export interface TodoState {

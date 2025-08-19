@@ -1,14 +1,13 @@
 import React, { useState, KeyboardEvent, ChangeEvent } from "react";
-import { useAppDispatch } from "../hooks/useAppDispatch";
-import { addTask } from "../store/todoSlice";
+import { useTodos } from "../hooks/useTodos";
 
 const AddTask: React.FC = () => {
   const [newTask, setNewTask] = useState<string>("");
-  const dispatch = useAppDispatch();
+  const { addTask } = useTodos();
 
   const handleAddTask = (): void => {
     if (newTask.trim()) {
-      dispatch(addTask(newTask.trim()));
+      addTask(newTask.trim());
       setNewTask("");
     }
   };
@@ -31,7 +30,7 @@ const AddTask: React.FC = () => {
         value={newTask}
         onChange={handleInputChange}
         onKeyDown={handleKeyPress}
-        className="flex-1 bg-add-task rounded-lg px-4 py-4 text-white text-base outline-none placeholder:text-text-gray transition-all duration-200"
+        className="flex-1 bg-add-task rounded-lg px-4 py-4 text-white text-base outline-none placeholder:text-text-gray"
       />
       <button
         onClick={handleAddTask}

@@ -1,10 +1,9 @@
 import React from "react";
-import { useAppSelector } from "../hooks/useAppSelector";
+import { useTodos } from "../hooks/useTodos";
 
 const StatusCard: React.FC = () => {
-  const tasks = useAppSelector((state) => state.todos.tasks);
-  const completedTasks = tasks.filter((task) => task.completed).length;
-  const totalTasks = tasks.length;
+  const { stats } = useTodos();
+  const { completed, total } = stats;
 
   return (
     <div className="mt-24 bg-dark-card border border-dark-border rounded-xl p-6 flex justify-between items-center animate-fade-in">
@@ -14,7 +13,7 @@ const StatusCard: React.FC = () => {
       </div>
       <div className="w-36 h-36 bg-lime-green rounded-full flex items-center justify-center text-5xl text-white">
         <span>
-          {completedTasks}/{totalTasks}
+          {completed}/{total}
         </span>
       </div>
     </div>

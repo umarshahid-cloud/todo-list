@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { TodoState, Task } from "../types";
+import { TodoState, Task } from "../../types";
 
 const initialState: TodoState = {
   tasks: [],
@@ -13,13 +13,13 @@ const todoSlice = createSlice({
       state.tasks.push({
         id: Date.now(),
         text: action.payload,
-        completed: false,
+        isComplete: false,
       });
     },
     toggleTask: (state, action: PayloadAction<number>) => {
       const task = state.tasks.find((task) => task.id === action.payload);
       if (task) {
-        task.completed = !task.completed;
+        task.isComplete = !task.isComplete;
       }
     },
     deleteTask: (state, action: PayloadAction<number>) => {
