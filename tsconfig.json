@@ -18,7 +18,26 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    /* Absolute imports */
+    "baseUrl": "src",
+    "paths": {
+      "@api/*": ["api/*"],
+      "@assets/*": ["assets/*"],
+      "@hooks/*": ["hooks/*"],
+      "@services/*": ["services/*"],
+      "@store/*": ["store/*"],
+      "@sagas/*": ["sagas/*"],
+      "@slices/*": ["slices/*"],
+      "@types": ["types/index.ts"],
+      "@types/*": ["types/*"],
+      "@ui/*": ["ui/*"],
+      "@src/*": ["*"]
+    },
+
+    /* Vite types (optional but handy) */
+    "types": ["vite/client"]
   },
   "include": ["src", "src/types/svg.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]

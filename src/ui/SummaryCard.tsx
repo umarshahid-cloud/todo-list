@@ -1,9 +1,8 @@
 import React from "react";
-import { useTodos } from "../hooks/useTodos";
+import { useTodosStats } from "@hooks/todo/useTodoStats";
 
 const StatusCard: React.FC = () => {
-  const { stats } = useTodos();
-  const { completed, total } = stats;
+  const { total, completed } = useTodosStats();
 
   return (
     <div className="mt-20 bg-dark-card border border-dark-border rounded-xl p-4 sm:p-6 flex justify-between items-center animate-fade-in">

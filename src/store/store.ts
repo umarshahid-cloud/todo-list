@@ -1,45 +1,18 @@
 import { configureStore } from "@reduxjs/toolkit";
-import todoReducer from "./slices/todoSlice";
-import { RootState, TodoState } from "../types";
+import createSagaMiddleware from "redux-saga";
+import rootReducer from "@store/rootReducer";
+import rootSaga from "@store/rootSaga";
 
-const defaultTodoState: TodoState = {
-  tasks: [],
-};
-
-function loadState(): RootState {
-  try {
-    const serializedState = localStorage.getItem("todoState");
-    if (!serializedState) {
-      return { todos: defaultTodoState };
-    }
-    return { todos: JSON.parse(serializedState) as TodoState };
-  } catch (e) {
-    console.warn("Load state error", e);
-    return { todos: defaultTodoState };
-  }
-}
-
-function saveState(state: RootState) {
-  try {
-    const serializedState = JSON.stringify(state.todos);
-    localStorage.setItem("todoState", serializedState);
-  } catch (e) {
-    console.warn("Save state error", e);
-  }
-}
-
-const preloadedState: RootState = loadState();
+const sagaMiddleware = createSagaMiddleware();
 
 export const store = configureStore({
-  reducer: {
-    todos: todoReducer,
-  },
-  preloadedState,
+  reducer: rootReducer,
+  middleware: (getDefault) =>
+    getDefault({ thunk: false }).concat(sagaMiddleware),
 });
 
-store.subscribe(() => {
-  saveState(store.getState());
-});
+sagaMiddleware.run(rootSaga);
 
 export type AppDispatch = typeof store.dispatch;
-export type AppState = RootState;
+export type AppStore = typeof store;
+export type RootState = ReturnType<typeof rootReducer>;

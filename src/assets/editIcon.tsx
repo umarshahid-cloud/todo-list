@@ -1,11 +1,11 @@
 import React from "react";
 
-interface IconProps {
+interface IIconProps {
   size?: number;
   color?: string;
 }
 
-const EditIcon: React.FC<IconProps> = ({
+const EditIcon: React.FC<IIconProps> = ({
   size = 32,
   color = "currentColor",
 }) => {

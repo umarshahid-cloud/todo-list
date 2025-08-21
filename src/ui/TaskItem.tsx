@@ -1,25 +1,25 @@
 import React, { useState, KeyboardEvent, ChangeEvent } from "react";
-import { useTodos } from "../hooks/useTodos";
-import { Task } from "../types";
-import EditIcon from "../assets/editIcon";
-import TrashIcon from "../assets/trashIcon";
+import { useTodosActions } from "@hooks/todo/useTodosActions";
+import { ITask } from "@types";
+import EditIcon from "@assets/editIcon";
+import TrashIcon from "@assets/trashIcon";
 
 interface TaskItemProps {
-  task: Task;
+  task: ITask;
 }
 
 const TaskItem: React.FC<TaskItemProps> = ({ task }) => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [editText, setEditText] = useState<string>(task.text);
 
-  const { toggleTask, deleteTask, editTask } = useTodos();
+  const { toggleTask, deleteTask, editTask } = useTodosActions();
 
   const handleToggle = (): void => {
-    toggleTask(task.id);
+    toggleTask(task._id);
   };
 
   const handleDelete = (): void => {
-    deleteTask(task.id);
+    deleteTask(task._id);
   };
 
   const handleEdit = (): void => {
@@ -29,7 +29,7 @@ const TaskItem: React.FC<TaskItemProps> = ({ task }) => {
 
   const handleSave = (): void => {
     if (editText.trim()) {
-      editTask(task.id, editText.trim());
+      editTask(task._id, editText.trim());
       setIsEditing(false);
     }
   };
@@ -64,7 +64,7 @@ const TaskItem: React.FC<TaskItemProps> = ({ task }) => {
             type="text"
             value={editText}
             onChange={handleInputChange}
-            onKeyPress={handleKeyPress}
+            onKeyDown={handleKeyPress}
             autoFocus
             className="flex-1 max-w-xs bg-transparent border border-lime-green rounded px-3 py-2 text-white text-base outline-none focus:shadow-focus-lime transition-all"
           />
