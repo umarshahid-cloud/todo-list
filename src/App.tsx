@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import "react-toastify/dist/ReactToastify.css";
 
-import Header from "@ui/Header";
-import StatusCard from "@ui/SummaryCard";
-import AddTask from "@ui/AddTask";
-import TaskList from "@ui/TaskList";
-import { useTodosActions } from "@hooks/todo/useTodosActions";
-import AppToastContainer from "@ui/components/AppToastContainer";
+import Header from "@src/ui/Header";
+import StatusCard from "@src/ui/SummaryCard";
+import AddTask from "@src/ui/AddTask";
+import TaskList from "@src/ui/TaskList";
+import { useTodosActions } from "@src/hooks/todo/useTodosActions";
+import AppToastContainer from "@src/ui/components/AppToastContainer";
 
 const App: React.FC = () => {
   const { fetchTodos } = useTodosActions();

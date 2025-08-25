@@ -1,5 +1,5 @@
 import React from "react";
-import { useTodosStats } from "@hooks/todo/useTodoStats";
+import { useTodosStats } from "@src/hooks/todo/useTodoStats";
 
 const StatusCard: React.FC = () => {
   const { total, completed } = useTodosStats();

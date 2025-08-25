@@ -1,5 +1,5 @@
 import React from "react";
-import CheckIcon from "@assets/checkIcon";
+import CheckIcon from "@src/assets/checkIcon";
 
 const Header: React.FC = () => {
   return (

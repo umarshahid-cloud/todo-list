@@ -1,10 +1,10 @@
 import React from "react";
-import { useTodosActions } from "@hooks/todo/useTodosActions";
+import { useTodosActions } from "@src/hooks/todo/useTodosActions";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import TextInput from "@ui/components/TextInput";
-import Button from "@ui/components/Button";
+import TextInput from "@src/ui/components/TextInput";
+import Button from "@src/ui/components/Button";
 
 type FormValues = { task: string };
 

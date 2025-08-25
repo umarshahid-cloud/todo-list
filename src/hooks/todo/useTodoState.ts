@@ -1,5 +1,5 @@
-import { useAppSelector } from "@hooks/useAppSelector";
-import { ITask } from "@types";
+import { useAppSelector } from "@src/hooks/useAppSelector";
+import { ITask } from "@src/types";
 
 export function useTodosState() {
   const tasks = useAppSelector((s) => s.todos.tasks as ITask[]);
@@ -9,5 +9,5 @@ export function useTodosState() {
 }
 
 export function useTaskById(id: string) {
-  return useAppSelector((s) => s.todos.tasks.find((t) => t._id === id));
+  return useAppSelector((s) => s.todos.tasks.find((t: ITask) => t._id === id));
 }

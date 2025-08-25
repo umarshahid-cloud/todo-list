@@ -1,8 +1,8 @@
 import React, { useState, KeyboardEvent, ChangeEvent } from "react";
-import { useTodosActions } from "@hooks/todo/useTodosActions";
-import { ITask } from "@types";
-import EditIcon from "@assets/editIcon";
-import TrashIcon from "@assets/trashIcon";
+import { useTodosActions } from "@src/hooks/todo/useTodosActions";
+import { ITask } from "@src/types";
+import EditIcon from "@src/assets/editIcon";
+import TrashIcon from "@src/assets/trashIcon";
 
 interface TaskItemProps {
   task: ITask;

@@ -1,7 +1,7 @@
 import React from "react";
-import { useTodosState } from "@hooks/todo/useTodoState";
-import TaskItem from "@ui/TaskItem";
-import { ITask } from "@types";
+import { useTodosState } from "@src/hooks/todo/useTodoState";
+import TaskItem from "@src/ui/TaskItem";
+import { ITask } from "@src/types";
 
 const TaskList: React.FC = () => {
   const { tasks } = useTodosState();

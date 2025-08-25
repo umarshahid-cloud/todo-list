@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, Action } from "@reduxjs/toolkit";
-import { ITask, ITodoState } from "@types";
+import { ITask, ITodoState } from "@src/types";
 
 const initialState: ITodoState = {
   tasks: [],
@@ -18,7 +18,7 @@ const todoSlice = createSlice({
   initialState,
   reducers: {
     // ---- Request creators (sagas listen for these)
-    fetchTodosRequest(_state) {},
+    fetchTodosRequest() {},
     addTaskRequest(_state, _action: PayloadAction<string>) {},
     toggleTaskRequest(_state, _action: PayloadAction<string>) {},
     editTaskRequest(

@@ -1,12 +1,12 @@
 import { useCallback } from "react";
-import { useAppDispatch } from "@hooks/useAppDispatch";
+import { useAppDispatch } from "@src/hooks/useAppDispatch";
 import {
   fetchTodosRequest,
   addTaskRequest,
   toggleTaskRequest,
   deleteTaskRequest,
   editTaskRequest,
-} from "@store/reducers/todoReducer";
+} from "@src/store/reducers/todoReducer";
 
 export function useTodosActions() {
   const dispatch = useAppDispatch();

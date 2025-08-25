@@ -1,6 +1,6 @@
 import { useMemo } from "react";
-import { ITask } from "@types";
-import { useTodosState } from "@hooks/todo/useTodoState";
+import { ITask } from "@src/types";
+import { useTodosState } from "@src/hooks/todo/useTodoState";
 
 export function useTodosStats() {
   const { tasks } = useTodosState();

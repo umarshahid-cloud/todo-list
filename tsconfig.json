@@ -23,16 +23,6 @@
     /* Absolute imports */
     "baseUrl": "src",
     "paths": {
-      "@api/*": ["api/*"],
-      "@assets/*": ["assets/*"],
-      "@hooks/*": ["hooks/*"],
-      "@services/*": ["services/*"],
-      "@store/*": ["store/*"],
-      "@sagas/*": ["sagas/*"],
-      "@slices/*": ["slices/*"],
-      "@types": ["types/index.ts"],
-      "@types/*": ["types/*"],
-      "@ui/*": ["ui/*"],
       "@src/*": ["*"]
     },
 
