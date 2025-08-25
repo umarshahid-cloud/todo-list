@@ -18,7 +18,16 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    /* Absolute imports */
+    "baseUrl": "src",
+    "paths": {
+      "@src/*": ["*"]
+    },
+
+    /* Vite types (optional but handy) */
+    "types": ["vite/client"]
   },
   "include": ["src", "src/types/svg.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]

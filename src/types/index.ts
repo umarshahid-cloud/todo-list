@@ -1,13 +1,17 @@
-export interface Task {
-  id: number;
+export interface ITask {
+  _id: string;
   text: string;
-  completed: boolean;
+  isComplete: boolean;
+  createdAt?: string;
 }
 
-export interface TodoState {
-  tasks: Task[];
+export interface ITodoState {
+  tasks: ITask[];
+  loading: boolean;
+  error: string | null;
 }
 
-export interface RootState {
-  todos: TodoState;
+export interface IIconProps {
+  size?: number;
+  color?: string;
 }
