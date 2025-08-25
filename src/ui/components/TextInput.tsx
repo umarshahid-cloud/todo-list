@@ -13,13 +13,16 @@ const TextInput: React.FC<TextInputProps> = ({
   error,
 }) => {
   return (
-    <input
-      type="text"
-      placeholder={placeholder}
-      {...registration}
-      className={`w-full bg-add-task rounded-lg px-4 py-4 text-white text-base outline-none placeholder:text-text-gray
+    <>
+      <input
+        type="text"
+        placeholder={placeholder}
+        {...registration}
+        className={`w-full bg-add-task rounded-lg px-4 py-4 text-white text-base outline-none placeholder:text-text-gray
         ${error ? "border border-red-500" : "border border-transparent"}`}
-    />
+      />
+      {error && <p className="mt-1 text-sm text-red-400">{error.message}</p>}
+    </>
   );
 };
 

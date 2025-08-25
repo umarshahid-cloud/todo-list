@@ -17,25 +17,21 @@ import {
   deleteTaskFailure,
 } from "@src/store/reducers/todoReducer";
 import { ITask } from "@src/types";
-import { todoApi } from "@src/api/TodoApi";
+import { TodoApi } from "@src/api/TodoApi";
 import { toast } from "react-toastify";
+
+const todoApi = new TodoApi();
 
 const pickById = (state: { todos: { tasks: ITask[] } }, id: string) =>
   state.todos.tasks.find((t) => t._id === id);
 
 function* handleFetchTodos() {
   try {
-    const items: ITask[] = yield call([todoApi, todoApi.getAll]);
+    const items: ITask[] = yield call([todoApi, todoApi.getTasks]);
 
-    const sorted = [...(items || [])].sort(
-      (a, b) =>
-        (Date.parse(b.createdAt || "") || 0) -
-        (Date.parse(a.createdAt || "") || 0)
-    );
+    yield put(fetchTodosSuccess(items));
 
-    yield put(fetchTodosSuccess(sorted));
-
-    if (sorted.length === 0) {
+    if (items.length === 0) {
       toast.info("No todos yet 📭");
     } else {
       toast.success("Todos loaded ✅");
@@ -69,7 +65,7 @@ function* handleToggleTodo(action: ReturnType<typeof toggleTaskRequest>) {
     const updated: ITask = { ...task, isComplete: !task.isComplete };
 
     const { _id, ...body } = updated;
-    yield call([todoApi, todoApi.update], _id, body);
+    yield call([todoApi, todoApi.updateTask], _id, body);
 
     yield put(toggleTaskSuccess(updated));
     toast.success(
@@ -90,7 +86,7 @@ function* handleEditTodo(action: ReturnType<typeof editTaskRequest>) {
     const updated: ITask = { ...task, text };
 
     const { _id, ...body } = updated;
-    yield call([todoApi, todoApi.update], _id, body);
+    yield call([todoApi, todoApi.updateTask], _id, body);
 
     yield put(editTaskSuccess(updated));
     toast.success("Task edited ✏️");
@@ -106,7 +102,7 @@ function* handleDeleteTodo(action: ReturnType<typeof deleteTaskRequest>) {
     const task: ITask | undefined = yield select(pickById, id);
     if (!task) throw new Error("Task not found");
 
-    yield call([todoApi, todoApi.remove], task._id);
+    yield call([todoApi, todoApi.removeTask], task._id);
     yield put(deleteTaskSuccess(id));
     toast.success("Task deleted 🗑️");
   } catch (e: any) {

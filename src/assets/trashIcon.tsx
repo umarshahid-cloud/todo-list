@@ -1,9 +1,5 @@
+import { IIconProps } from "@src/types";
 import React from "react";
-
-interface IIconProps {
-  size?: number;
-  color?: string;
-}
 
 const TrashIcon: React.FC<IIconProps> = ({
   size = 32,

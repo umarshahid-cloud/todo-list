@@ -45,9 +45,6 @@ const AddTask: React.FC = () => {
           registration={register("task", { required: "Task is required" })}
           error={errors.task}
         />
-        {errors.task && (
-          <p className="mt-1 text-sm text-red-400">{errors.task.message}</p>
-        )}
       </div>
       <Button
         type="submit"

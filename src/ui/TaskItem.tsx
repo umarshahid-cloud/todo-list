@@ -4,11 +4,11 @@ import { ITask } from "@src/types";
 import EditIcon from "@src/assets/editIcon";
 import TrashIcon from "@src/assets/trashIcon";
 
-interface TaskItemProps {
+interface ITaskItemProps {
   task: ITask;
 }
 
-const TaskItem: React.FC<TaskItemProps> = ({ task }) => {
+const TaskItem: React.FC<ITaskItemProps> = ({ task }) => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [editText, setEditText] = useState<string>(task.text);
 

@@ -1,13 +1,18 @@
+import { useMemo } from "react";
 import { useAppSelector } from "@src/hooks/useAppSelector";
 import { ITask } from "@src/types";
 
-export function useTodosState() {
+export function useTodos() {
   const tasks = useAppSelector((s) => s.todos.tasks as ITask[]);
   const loading = useAppSelector((s) => s.todos.loading);
   const error = useAppSelector((s) => s.todos.error);
-  return { tasks, loading, error };
-}
 
-export function useTaskById(id: string) {
-  return useAppSelector((s) => s.todos.tasks.find((t: ITask) => t._id === id));
+  const { total, completed, active } = useMemo(() => {
+    const total = tasks.length;
+    const completed = tasks.filter((t) => t.isComplete).length;
+    const active = total - completed;
+    return { total, completed, active };
+  }, [tasks]);
+
+  return { tasks, loading, error, total, completed, active };
 }

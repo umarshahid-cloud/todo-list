@@ -1,26 +1,36 @@
-// src/api/todoApi.ts
-import { BaseApi } from "./baseApi";
+import { BaseApi } from "@src/api/baseApi";
 import { ITask } from "@src/types";
+import { BASE_URL, API_ENDPOINTS } from "@src/config/constant";
 
-class TodoApi extends BaseApi<ITask> {
-  private static _instance: TodoApi;
+export class TodoApi extends BaseApi {
+  private readonly path = API_ENDPOINTS.TODOS;
 
-  private constructor() {
-    super("/todos");
+  constructor() {
+    super(BASE_URL);
   }
 
-  static get instance() {
-    if (!this._instance) this._instance = new TodoApi();
-    return this._instance;
+  async getTasks() {
+    return this.get<ITask[]>(this.path);
+  }
+
+  async getTask(id: string) {
+    return this.get<ITask>(`${this.path}/${id}`);
   }
 
   async createTask(text: string) {
-    return this.create({
+    const task: Partial<ITask> = {
       text,
       isComplete: false,
       createdAt: new Date().toISOString(),
-    });
+    };
+    return this.post<ITask>(this.path, task);
+  }
+
+  async updateTask(id: string, data: Partial<ITask>) {
+    return this.patch<ITask>(`${this.path}/${id}`, data);
+  }
+
+  async removeTask(id: string) {
+    return this.delete(`${this.path}/${id}`);
   }
 }
-
-export const todoApi = TodoApi.instance;

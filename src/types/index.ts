@@ -11,4 +11,7 @@ export interface ITodoState {
   error: string | null;
 }
 
-
+export interface IIconProps {
+  size?: number;
+  color?: string;
+}

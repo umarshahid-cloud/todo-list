@@ -1,37 +1,31 @@
-import axios from "axios";
+import axios, { AxiosInstance } from "axios";
 
-export const api = axios.create({
-  baseURL: import.meta.env.VITE_BACKEND_BASE || "http://localhost:4000",
-  headers: { "Content-Type": "application/json" },
-});
+export abstract class BaseApi {
+  protected api: AxiosInstance;
 
-export class BaseApi<T> {
-  constructor(private path: string) {}
+  constructor(baseURL?: string) {
+    this.api = axios.create({
+      baseURL,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
 
-  async getAll(): Promise<T[]> {
-    const res = await api.get(this.path);
+  async get<T>(url: string): Promise<T> {
+    const res = await this.api.get<T>(url);
     return res.data;
   }
 
-  async getOne(id: string): Promise<T> {
-    const res = await api.get(`${this.path}/${id}`);
+  async post<T>(url: string, data: any): Promise<T> {
+    const res = await this.api.post<T>(url, data);
     return res.data;
   }
 
-  async create(data: Partial<T>): Promise<T> {
-    const res = await api.post(this.path, data);
+  async patch<T>(url: string, data: any): Promise<T> {
+    const res = await this.api.patch<T>(url, data);
     return res.data;
   }
 
-  async update(id: string, data: Partial<T>): Promise<T> {
-    const cleaned = Object.fromEntries(
-      Object.entries(data).filter(([, v]) => v !== undefined)
-    ) as Partial<T>;
-    const res = await api.patch(`${this.path}/${id}`, cleaned);
-    return res.data;
-  }
-
-  async remove(id: string): Promise<void> {
-    await api.delete(`${this.path}/${id}`);
+  async delete(url: string): Promise<void> {
+    await this.api.delete(url);
   }
 }
